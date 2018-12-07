@@ -1,5 +1,9 @@
 #!/bin/bash
 
+## This is the code of bash script. 
+## first capture a photo using Pi camera, then identify the location of red caps, then use python code to calculate rotating angles
+## copyright to Yanrui Wang, Yazhi Fan
+
 while true
 do
 	# preparation work: remove existing files
