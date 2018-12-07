@@ -66,8 +66,8 @@
                 <li>
                   <a href="#Design" id="link_design">Design & Testing</a>
                   <ul>
-                    <li><a href="#Hardware Design" id="link_Hardware Design">Hardware Design</a></li>
-                    <li><a href="#Software Design" id="link_Software Design">Software Design</a></li>
+                    <li><a href="#Hardware_Design" id="link_Hardware_Design">Hardware Design</a></li>
+                    <li><a href="#Software_Design" id="link_Software_Design">Software Design</a></li>
                   </ul>
                 </li>
                   <a href="#Results" id="link_Results" >Results</a>
@@ -76,7 +76,10 @@
                   <a href="#Conclusion" id="link_Conclusion" >Conclusion</a>
                 </li>
                 <li>
-                  <a href="#Future Work" id="link_Future Work" >Future Work</a>
+                  <a href="#Future_Work" id="link_Future_Work" >Future Work</a>
+                </li>
+                <li>
+                  <a href="#References" id="link_References" >References</a>
                 </li>
               </ul>
             </aside>
@@ -96,14 +99,14 @@
 
               <h1 id="Design" class="checkpoint">Design</h1>
               <p> </p>
-              <h2 id="Hardware Design" class="checkpoint">Hardware Design</h2>
+              <h2 id="Hardware_Design" class="checkpoint">Hardware Design</h2>
               <p> In the first week of final project, we planned our work and prepared for hardware and software simultaneously. Because we were familiar with lab servos, we wanted to 3D print all the necessary mechanical parts for our robot. </p>
               <p> We first downloaded an open source robotic arm CAD from online. We printed several parts but got some printing failures for the larger parts. Additionally, some parts required up to 20 hours to print. There were 27 parts in total which we estimated would require at least a week to print. We gave up for printing the whole arm due to time limits.</p>
               <p> We then bought a robotic arm from Amazon.com, we decided to use only the mechanical parts of it. Because the servos we used in lab and the servos for the arm were of different sizes, we 3D printed links and brackets that would fit our own servos.</p>
               <p> Then we faced the biggest issue: the PWM lab servos were not accurate. When the signal was send through PWM, the error could be over 5 degrees. Therefore, they were too incurrate to be used as servos for robotic arm. We had to give up the old servos and use the servos from the arm kit instead.</p>
               <p> We attached all the servos and links using robotic arm we bought online. After testing the functionality of every servo and link, we built our whole system as the following image shown. </p>
 
-              <h2 id="Software Design" class="checkpoint">Software Design</h2>
+              <h2 id="Software_Design" class="checkpoint">Software Design</h2>
               <h3>Computer Vision</h3>
               <p> The first task of this system was to take an image of the waste field and identify the bottles on the field. We assembled a wooden post/framework and attached a Pi camera on it so that the camera was directly above the field. The camera was attached to a Raspberry Pi, and the Pi sat above the post. In the beginning, the camera took an image of the field and stored this image inside the Pi’s file system. We wrote a C++ program that used OpenCV to detect any red circles in the image. The OpenCV part of our program was referenced and modified from the blog Solarian Programmer (reference 2). This program first converted the image from RGB color space to HSV space so that it can easily select a single color based on its hue. Then OpenCV threshold the image and only kept the pixels that were red from both the lower (0-10) and upper (160-179) HSV hue range. The resulting images that contain only the red pixels were then combined and blurred. Next the program performed a Hough transform using the OpenCV HoughCircles function to detect the circles. All circles were then stored in a vector as objects with center and size so we could easily locate them. </p>
               <p> We tested this program multiple times and it almost always worked as expected. The only mistake that the program made was that sometimes it recognized very small circles around the bottle neck. This happened rarely, and the amount of additional circles was not large. When this happened, the arm would try to grab at the same spot multiple times. We thought this was tolerable. However, the program performed very poorly when there were interferences, such as when the lighting was dim or when there were interferences in the field, especially other red objects, the program behaved very poorly. It could recognize up to hundreds of additional noises and the arm would get out of control, trying to grab non-existent objects. </p>
@@ -124,11 +127,13 @@
               <h1 id="Conclusion" class="checkpoint">Conclusion</h1>
               <p>The test results that our system achieved were fairly good in terms of speed and accuracy. On the simple model platform that we build, our robot could successfully recognize and pick up bottles over 95% of the time. There were some situations when the robot performed poorly, such as when the light was dim and when there were other red objects on the platform. One thing we discovered is that it is impossible for the robot to be accurate 100% of the time. During the entire process, there were many places that could be heavily affected by noises and uncertainties, such as the image recognition stage, the inverse kinematic calculation, and so on. </p>
 
-              <h1 id="Future Work" class="checkpoint">Future Work</h1>
+              <h1 id="Future_Work" class="checkpoint">Future Work</h1>
               <p> Our project has tremendous potential and many more additional features to be realized. There are two major directions of possible improvements. One is to make the model more realistic. This can be achieved by adding a more complete set of trash to our field space. Another direction is to make the system more accurate. This can be achieved by changing the control from open-loop to close-loop. </p>
               <p> In this project, we used milk bottles to represent recyclable wastes and white blocks to represent everything else. We also set our target position height to be constant, so the robot can only grab bottles that are standing up straight. To make this model more realistic, we can use a more complex machine learning program to recognize all types of recyclable wastes, such as other types of bottles, plastic bags, or even paper boxes. We also need the system to recognize those wastes in all directions, instead of just from the top view. To achieve this, we need to add more than one camera to also detect object’s height. </p>
               <p> With a more complex set of objects to grab, open-loop control will not be accurate enough. We need to change the picking up angles depending on the current location of end-effector and target location, orientation and shape. This change will be very complicated, corresponding solutions will be based on issues and how current industrial and research are handing them.  </p>
               <p> One more idea is proposed by Professor Joseph Skovira, we could change our fixed workspace to a conveyor belt. Robotic arm would pick up recyclable wastes sequencely. To realize this change, we need to make our system a real timed system. Computation complex and system working speed should be considered and improved.  </p>
+              
+              <h1 id="References" class="checkpoint">References</h1>
               
             </div>
           </div>
