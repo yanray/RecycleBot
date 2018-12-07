@@ -1,3 +1,7 @@
+## This is the code for computing Inverse Kinematics. 
+## two functions: gen_config() is the limits of servos, ik_srv() is for computation of Inverse Kinematics. 
+## copyright to Yanrui Wang, Yazhi Fan
+
 import numpy as np
 from math import radians
 from random import uniform
