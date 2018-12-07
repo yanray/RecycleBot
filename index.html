@@ -60,6 +60,10 @@
                 </li>
                 <li>
                   <a href="#Introduction" id="link_intro" class="is-active">Introduction</a>
+                </li>
+                <li>
+                  <a href="#Results" id="link_intro" class="is-active">Results</a>
+                </li>
               </ul>
             </aside>
           </div>
@@ -76,6 +80,9 @@
               <p>For this project, we created a model waste field on a wood board. The field contained two types of waste: recyclable and non-recyclable. To simplify the work, we limited the types of waste on this field. The recyclable wastes were represented by empty plastic milk bottles with red caps, and the non-recyclable wastes were represented by hollow white blocks. The robotic arm was set in front of the platform, and a Raspberry Pi camera was set at the top of the platform on a post. An arduino was attached on back of the post. A recycle bin was set on the left side of the platform. </p>
               <p>When the system first started, the Raspberry Pi camera captured an image of the field. Then the system checked if there were recyclable bottles in the field by identifying red circles on the image with a OpenCV program. If there was one or more bottles, the program would calculate the center of the red caps. Then those values in pixels were converted to values in meters. Another program read the location values and converted them to sets of angles using inverse kinematics. Each set contained six angles since there were six servos on the arm. Then the Raspberry Pi would send those angles one by one to an arduino that controlled the arm through USB serial port. Next the arduino send the angle movements to the servos on the arm through serial port. The arm would then perform a series of movements that allowed it to grab the bottles at the target locations and put them inside the recycle bin. After all bottles were cleared, the arduino would send a ‘done’ message to the Raspberry Pi, and the Pi would take another image of the field. The whole process described above is then repeated.  </p>
 
+              <h1 id="Results" class="checkpoint">Results</h1>
+              <p>We reached our basic goals, and every subsystem performed well as expected. Our computer vision program recognized the red caps on the bottle with good accuracy. The coordinate conversion, although very simple, also performed very well within certain ranges of distances. Finally, our Inverse Kinematics algorithm was sturdy and very rarely failed unless the bottles were placed in unreachable places. The overall accuracy was over 95%. The bash script we wrote realized the whole process in a single command. In general, the whole process was very smooth, and we were very satisfied with the end product. </p>
+              
               <h1 id="references" class="checkpoint">References</h1>
 
             </div>
