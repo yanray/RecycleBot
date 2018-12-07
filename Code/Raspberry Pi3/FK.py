@@ -1,5 +1,5 @@
 ## This is the code for computing Forward Kinematics. 
-## two functions: dh_matrix is for computation of DH matrix, fk_srv is for computation of Forward Kinematics. 
+## two functions: dh_matrix() is for computation of DH matrix, fk_srv() is for computation of Forward Kinematics. 
 ## copyright to Yanrui Wang, Yazhi Fan
 
 import numpy as np
