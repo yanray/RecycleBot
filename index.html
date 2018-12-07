@@ -52,7 +52,7 @@
                 <li>
                   <a href="#Project Background" id="link_intro" class="is-active">Project Background</a>
                 </li>
-                li>
+                <li>
                   <a href="#Introduction" id="link_intro" class="is-active">Introduction</a>
                 </li>
                 li>
@@ -89,7 +89,7 @@
           <div class="column is-two-thirds">
             <div class="content">
               <h1 id="intro" class="checkpoint">Introduction</h1>
-              <p>In this project, we created a one-way communication system using a Raspberry Pi, a microphone, and a speaker. The speaker, acting as the transmitter in the system, was able to communicate arbitrary, fixed-length bit string frames to the Raspberry Pi by playing a series of tones, which the microphone recorded and the Pi processed to recover the bits. Bits were encoded using multiple frequency shift keying (MFSK), which assigns different tone frequencies to different combinations of bits, allowing for multiple bits to be sent in each transmitted symbol. By implementing a cyclic redundancy check, we were able to create a system that was fairly robust to noise and echoes; given the constraints of the frequency band that we were working with (about 350 Hz to 750 Hz), we did not expect to correctly receive every transmission, but we were able to at least detect whether a transmission was received without error.</p>
+              <p></p>
 
               <h1 id="design" class="checkpoint">Design &amp; Testing</h1>
               <p>Our system uses software on the Raspberry Pi to demodulate received signals to extract the original information transmitted by an laptop transmitter. Demodulation is done primarily in software, with analog-to-digital conversion done in hardware. On the transmitter size, an laptop runs an application to modulate a series of bits into an MFSK signal. Figure 1 shows an overview of our system.</p>
