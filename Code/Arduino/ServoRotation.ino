@@ -1,3 +1,7 @@
+## This is the code for controlling servo via Arduino. 
+## Arduino will receive rotating degrees from Raspberry pi then sends those values to 6 different servo through Serial Port. 
+## copyright to Yanrui Wang, Yazhi Fan
+
 // SoftwareSerial - Version: Latest 
 #include <SoftwareSerial.h>
 
