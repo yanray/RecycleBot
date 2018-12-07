@@ -67,6 +67,9 @@
                 <li>
                   <a href="#Conclusion" id="link_intro" class="is-active">Conclusion</a>
                 </li>
+                <li>
+                  <a href="#Future Work" id="link_intro" class="is-active">Future Work</a>
+                </li>
               </ul>
             </aside>
           </div>
@@ -89,6 +92,12 @@
               <h1 id="Conclusion" class="checkpoint">Conclusion</h1>
               <p>The test results that our system achieved were fairly good in terms of speed and accuracy. On the simple model platform that we build, our robot could successfully recognize and pick up bottles over 95% of the time. There were some situations when the robot performed poorly, such as when the light was dim and when there were other red objects on the platform. One thing we discovered is that it is impossible for the robot to be accurate 100% of the time. During the entire process, there were many places that could be heavily affected by noises and uncertainties, such as the image recognition stage, the inverse kinematic calculation, and so on. </p>
 
+              <h1 id="Future Work" class="checkpoint">Future Work</h1>
+              <p> Our project has tremendous potential and many more additional features to be realized. There are two major directions of possible improvements. One is to make the model more realistic. This can be achieved by adding a more complete set of trash to our field space. Another direction is to make the system more accurate. This can be achieved by changing the control from open-loop to close-loop. </p>
+              <p> In this project, we used milk bottles to represent recyclable wastes and white blocks to represent everything else. We also set our target position height to be constant, so the robot can only grab bottles that are standing up straight. To make this model more realistic, we can use a more complex machine learning program to recognize all types of recyclable wastes, such as other types of bottles, plastic bags, or even paper boxes. We also need the system to recognize those wastes in all directions, instead of just from the top view. To achieve this, we need to add more than one camera to also detect object’s height. </p>
+              <p> With a more complex set of objects to grab, open-loop control will not be accurate enough. We need to change the picking up angles depending on the current location of end-effector and target location, orientation and shape. This change will be very complicated, corresponding solutions will be based on issues and how current industrial and research are handing them.  </p>
+              <p> One more idea is proposed by Professor Joseph Skovira, we could change our fixed workspace to a conveyor belt. Robotic arm would pick up recyclable wastes sequencely. To realize this change, we need to make our system a real timed system. Computation complex and system working speed should be considered and improved.  </p>
+              
             </div>
           </div>
         </div>
