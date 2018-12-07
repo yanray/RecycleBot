@@ -24,8 +24,6 @@ double convert(double x1, double y1, double x2, double y2, double x) {
 
 	double slope = (y2 - y1)/(x2 - x1);
 	double intercept = y1 - x1*slope;
-	// std::cout<<intercept<<std::endl;
-	
 	return x * slope+intercept;
 }
 
@@ -68,13 +66,6 @@ int main(int argc, char **argv) {
 	// Loop over all detected circles and outline them on the original image
 	if(circles.size() == 0) std::exit(-1);
 	for(size_t current_circle = 0; current_circle < circles.size(); ++current_circle) {
-		cv::Point center(std::round(circles[current_circle][0]), std::round(circles[current_circle][1]));
-		int radius = std::round(circles[current_circle][2]);
-
-		cv::circle(orig_image, center, radius, cv::Scalar(0, 255, 0), 5);
-		
-		// std::cout<<center.x<<" "<<center.y<<" "<<0.08<<std::endl;
-		
 		/* Now need to cnvert from pixel value to real distance
 		 * We are using a spline interpolation program to map the coordinates
 		 */
@@ -84,20 +75,6 @@ int main(int argc, char **argv) {
 		
 		std::cout<<x_dist<<" "<<y_dist<<" "<<0.08<<std::endl;
 		
-	}
-	
-	// Show images
-	cv::namedWindow("Threshold lower image", cv::WINDOW_NORMAL);
-	cv::imshow("Threshold lower image", lower_red_hue_range);
-	cv::namedWindow("Threshold upper image", cv::WINDOW_NORMAL);
-	cv::imshow("Threshold upper image", upper_red_hue_range);
-	cv::namedWindow("Combined threshold images", cv::WINDOW_NORMAL);
-	cv::imshow("Combined threshold images", red_hue_image);
-	cv::namedWindow("Detected red circles on the input image", cv::WINDOW_NORMAL);
-	cv::imshow("Detected red circles on the input image", orig_image);
-
-	cv::waitKey(0);
-
-	
+	}	
 	return 0;
 }
