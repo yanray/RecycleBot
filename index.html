@@ -96,15 +96,17 @@
 
               <h1 id="Design" class="checkpoint">Design</h1>
               <p> </p>
-              <h2 id="Hardware Design" class="checkpoint">Hardware Design</h1>
+              <h2 id="Hardware Design" class="checkpoint">Hardware Design</h2>
               <p> In the first week of final project, we planned our work and prepared for hardware and software simultaneously. Because we were familiar with lab servos, we wanted to 3D print all the necessary mechanical parts for our robot. </p>
               <p> We first downloaded an open source robotic arm CAD from online. We printed several parts but got some printing failures for the larger parts. Additionally, some parts required up to 20 hours to print. There were 27 parts in total which we estimated would require at least a week to print. We gave up for printing the whole arm due to time limits.</p>
               <p> We then bought a robotic arm from Amazon.com, we decided to use only the mechanical parts of it. Because the servos we used in lab and the servos for the arm were of different sizes, we 3D printed links and brackets that would fit our own servos.</p>
               <p> Then we faced the biggest issue: the PWM lab servos were not accurate. When the signal was send through PWM, the error could be over 5 degrees. Therefore, they were too incurrate to be used as servos for robotic arm. We had to give up the old servos and use the servos from the arm kit instead.</p>
               <p> We attached all the servos and links using robotic arm we bought online. After testing the functionality of every servo and link, we built our whole system as the following image shown. </p>
 
-              <h2 id="Software Design" class="checkpoint">Software Design</h1>
-              <p> </p>
+              <h2 id="Software Design" class="checkpoint">Software Design</h2>
+              <h3>Computer Vision</h3>
+              <p> The first task of this system was to take an image of the waste field and identify the bottles on the field. We assembled a wooden post/framework and attached a Pi camera on it so that the camera was directly above the field. The camera was attached to a Raspberry Pi, and the Pi sat above the post. In the beginning, the camera took an image of the field and stored this image inside the Pi’s file system. We wrote a C++ program that used OpenCV to detect any red circles in the image. The OpenCV part of our program was referenced and modified from the blog Solarian Programmer (reference 2). This program first converted the image from RGB color space to HSV space so that it can easily select a single color based on its hue. Then OpenCV threshold the image and only kept the pixels that were red from both the lower (0-10) and upper (160-179) HSV hue range. The resulting images that contain only the red pixels were then combined and blurred. Next the program performed a Hough transform using the OpenCV HoughCircles function to detect the circles. All circles were then stored in a vector as objects with center and size so we could easily locate them. </p>
+              <h3>Computer Vision</h3>
               <p> </p>
               
               <h1 id="Results" class="checkpoint">Results</h1>
