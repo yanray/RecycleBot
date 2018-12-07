@@ -1,5 +1,9 @@
-import os, sys, pygame, time
-from pygame.locals import *
+## This is the code of calculating rotating angles. 
+## The functionality is only using Inverse Kinematics, other two are just for testing functionality of service. 
+## In the end, we converts rotating angles to rotating degrees then send those six values to arduino. 
+## copyright to Yanrui Wang, Yazhi Fan
+
+import os, sys, time
 import numpy as np
 import RPi.GPIO as GPIO
 import math
