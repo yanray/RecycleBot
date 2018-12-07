@@ -83,31 +83,31 @@
           </div>
           <div class="column is-two-thirds">
             <div class="content">
-              <h id="Objective" class="checkpoint">Objective</h1>
+              <h1 id="Objective" class="checkpoint">Objective</h1>
               <p>The objective of this project is to design and assemble a robotic arm that recognizes and picks out recyclable wastes from a workspace of mixed wastes. The arm should be able to approach its target with a good accuracy, and occasional mistakes can be tolerated. This recycling robot will both reduce the cost in waste management and also reduce amount of man made wastes in nature.</p>
               
-              <h id="Background" class="checkpoint">Project Background</h1>
+              <h1 id="Background" class="checkpoint">Project Background</h1>
               <p>Our idea is derived from daily life experience. Every now and then, We can see people carelessly toss recyclable wastes in the non-recyclable bin. This careless behavior adds up over time and is becoming a tremendous environmental issue. According to an article by National Geographics published in 2017, abound 91% plastic is not recycled (reference 1). All those wastes are either incinerated or discarded in a landfill or nature environment. Those wastes, especially plastics, are extremely harmful to the environment. Although awareness has increased in recent years, there are still many people who are unwilling to recycle. </p>
               <p>Therefore, how are we going to solve this problem? We introduce RecycleBot: an autonomous robotic arm that sorts recyclable and non-recyclable wastes. This system will both increase the amount of recycling and decrease the human labor cost in waste management. </p>
               
-              <h id="Introduction" class="checkpoint">Introduction</h1>
+              <h1 id="Introduction" class="checkpoint">Introduction</h1>
               <p>For this project, we created a model waste field on a wood board. The field contained two types of waste: recyclable and non-recyclable. To simplify the work, we limited the types of waste on this field. The recyclable wastes were represented by empty plastic milk bottles with red caps, and the non-recyclable wastes were represented by hollow white blocks. The robotic arm was set in front of the platform, and a Raspberry Pi camera was set at the top of the platform on a post. An arduino was attached on back of the post. A recycle bin was set on the left side of the platform. </p>
               <p>When the system first started, the Raspberry Pi camera captured an image of the field. Then the system checked if there were recyclable bottles in the field by identifying red circles on the image with a OpenCV program. If there was one or more bottles, the program would calculate the center of the red caps. Then those values in pixels were converted to values in meters. Another program read the location values and converted them to sets of angles using inverse kinematics. Each set contained six angles since there were six servos on the arm. Then the Raspberry Pi would send those angles one by one to an arduino that controlled the arm through USB serial port. Next the arduino send the angle movements to the servos on the arm through serial port. The arm would then perform a series of movements that allowed it to grab the bottles at the target locations and put them inside the recycle bin. After all bottles were cleared, the arduino would send a ‘done’ message to the Raspberry Pi, and the Pi would take another image of the field. The whole process described above is then repeated.  </p>
 
-              <h id="Design" class="checkpoint">Design</h1>
+              <h1 id="Design" class="checkpoint">Design</h1>
               <p> </p>
-              <h1 id="Hardware Design" class="checkpoint">Hardware Design</h1>
+              <h2 id="Hardware Design" class="checkpoint">Hardware Design</h1>
               <p> In the first week of final project, we planned our work and prepared for hardware and software simultaneously. Because we were familiar with lab servos, we wanted to 3D print all the necessary mechanical parts for our robot. </p>
               <h2 id="Software Design" class="checkpoint">Software Design</h1>
               <p> </p>
               
-              <h id="Results" class="checkpoint">Results</h1>
+              <h1 id="Results" class="checkpoint">Results</h1>
               <p>We reached our basic goals, and every subsystem performed well as expected. Our computer vision program recognized the red caps on the bottle with good accuracy. The coordinate conversion, although very simple, also performed very well within certain ranges of distances. Finally, our Inverse Kinematics algorithm was sturdy and very rarely failed unless the bottles were placed in unreachable places. The overall accuracy was over 95%. The bash script we wrote realized the whole process in a single command. In general, the whole process was very smooth, and we were very satisfied with the end product. </p>
               
-              <h id="Conclusion" class="checkpoint">Conclusion</h1>
+              <h1 id="Conclusion" class="checkpoint">Conclusion</h1>
               <p>The test results that our system achieved were fairly good in terms of speed and accuracy. On the simple model platform that we build, our robot could successfully recognize and pick up bottles over 95% of the time. There were some situations when the robot performed poorly, such as when the light was dim and when there were other red objects on the platform. One thing we discovered is that it is impossible for the robot to be accurate 100% of the time. During the entire process, there were many places that could be heavily affected by noises and uncertainties, such as the image recognition stage, the inverse kinematic calculation, and so on. </p>
 
-              <h id="Future Work" class="checkpoint">Future Work</h1>
+              <h1 id="Future Work" class="checkpoint">Future Work</h1>
               <p> Our project has tremendous potential and many more additional features to be realized. There are two major directions of possible improvements. One is to make the model more realistic. This can be achieved by adding a more complete set of trash to our field space. Another direction is to make the system more accurate. This can be achieved by changing the control from open-loop to close-loop. </p>
               <p> In this project, we used milk bottles to represent recyclable wastes and white blocks to represent everything else. We also set our target position height to be constant, so the robot can only grab bottles that are standing up straight. To make this model more realistic, we can use a more complex machine learning program to recognize all types of recyclable wastes, such as other types of bottles, plastic bags, or even paper boxes. We also need the system to recognize those wastes in all directions, instead of just from the top view. To achieve this, we need to add more than one camera to also detect object’s height. </p>
               <p> With a more complex set of objects to grab, open-loop control will not be accurate enough. We need to change the picking up angles depending on the current location of end-effector and target location, orientation and shape. This change will be very complicated, corresponding solutions will be based on issues and how current industrial and research are handing them.  </p>
