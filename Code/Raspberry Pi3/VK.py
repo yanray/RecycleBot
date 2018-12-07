@@ -1,3 +1,7 @@
+## This is the code for computing Velocity Kinematics. 
+## one function: fk_srv is for computation of Velocity Kinematics. 
+## copyright to Yanrui Wang, Yazhi Fan
+
 import numpy as np
 import math
 from math import pi
