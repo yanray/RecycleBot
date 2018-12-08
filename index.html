@@ -136,8 +136,8 @@
               <p> We attached all the servos and links using robotic arm we bought online. After testing the functionality of every servo and link, we built our whole system as the following image shown. </p>
               <figure>
                 <img src="img/complete_arm.jpg" alt="complete_arm">
-                <figcaption>Figure 1: DH matrix.</figcaption>
-                <p> On the left, we build different frames on each servo. On the right, we list four parameters for frame change. This aims to compute Forward Kinematics. </p>
+                <figcaption>Figure 1: The assembled arm using parts from the LewanSoul xArm kit.</figcaption>
+                <p> The LewanSoul xArm kit comes with mechanical parts, servos, a motor controller, desktop software, and many more accessories. We are using their mechanical parts and servos. During the testing, we are using the motor controller as a power supply switch for the arm.</p>
               </figure>
               
               <h2 id="Software_Design" class="checkpoint">Software Design</h2>
@@ -149,9 +149,9 @@
               <p> From what we saw in the end result, this simple linear conversion was very accurate in most cases. It was most accurate when the bottle was close to the center of the field (where the camera was placed) and less accurate further away. This was mostly because the wooden field was not flat, and the image of the camera was also not a perfect linear projection. A way to improve its accuracy was to sample more points and make a 2D interpolation using methods such as basis spline. Due to time limit, we settled with linear conversion.</p>
               <h3>Inverse Kinematics</h3>
               <figure>
-                <img src="img/DH_matrix.jpg.jpg" alt="DH_matrix" width="350" height="350">
-                <figcaption>Figure 2: 3D printed servo bracket that fits the PWM servos.</figcaption>
-                <p> We initially want to 3D print all parts that are related to the servo and combine them with other frameworks such as the base station and the gripper. However, the PWM servos are not as accurate as the serial bus servos so we give up this plan.</p>
+                <img src="img/DH_matrix.jpg" alt="DH_matrix" width="350" height="350">
+                <figcaption>Figure 2: DH_matrix</figcaption>
+                <p> On the left, we build different frames on each servo. On the right, we list four parameters for frame change. This aims to compute Forward Kinematics. </p>
               </figure>
               <p> The second task of this system was to convert the target location in meters to servo rotating degrees in angles. We used Inverse Kinematics to achieve this task. Before we dive into Inverse Kinematics, we should briefly introduce Forward Kinematics. Suppose we know the rotating angles of our 6 servos, we could build a reference frame for every servo. Forward Kinematics is to build a position relationship of base attached servo with end-effector, also known as a gripper. The basic method for Inverse Kinematics is initializing a rotating angle for each servo and then use Forward Kinematics to compute the current target position. We compare current target position and goal position to output an error. Then Velocity Kinematics aims to calculate the updated rotating angles (you could image Velocity Kinematics as gradient since we want to minimize error). Then in the iteration, we minimize error to a threshold and output rotating angles for each servo. </p>
               <p> We used open-loop control which meant the arm would reach the target with a single calculation. Although this was not as accurate as close-loop control, it was faster. Considering that both image recognition and serial communication were slow, we chose open-loop control. The test result showed that this method was fairly good in terms of speed and accuracy. On the simple model platform that we build, our robot could successfully recognize and pick up bottles over 95% of the time unless the bottle is out of the arm’s reach. Additionally, we used Forward Kinematics to test the accuracy of Inverse Kinematics, and the results were satisfactory. </p>
