@@ -1,3 +1,6 @@
+### OpenCV program for image recognition 
+### copyright to Yanrui Wang, Yazhi Fan
+
 #include <opencv2/opencv.hpp>
 #include <iostream>
 #include <string>
