@@ -121,7 +121,14 @@
               <p> We first downloaded an open source robotic arm CAD from online. We printed several parts but got some printing failures for the larger parts. Additionally, some parts required up to 20 hours to print. There were 27 parts in total which we estimated would require at least a week to print. We gave up for printing the whole arm due to time limits.</p>
               <p> We then bought a robotic arm from Amazon.com, we decided to use only the mechanical parts of it. Because the servos we used in lab and the servos for the arm were of different sizes, we 3D printed links and brackets that would fit our own servos.</p>
               <figure>
-                <img src="img/3D_printed_parts.jpg" src="img/3D_printed_parts2.jpg" alt="3D printed parts" width="350" height="350">
+                <div class="columns">
+                  <div class="column">
+                    <img src="img/3D_printed_parts.jpg" alt="3D printed parts1">
+                  </div>
+                  <div class="column">
+                    <img src="img/3D_printed_parts2.jpg" alt="3D printed parts2">
+                  </div>
+                </div>
                 <figcaption>Figure 2: 3D printed servo bracket that fits the PWM servos.</figcaption>
                 <p> We initially want to 3D print all parts that are related to the servo and combine them with other frameworks such as the base station and the gripper. However, the PWM servos are not as accurate as the serial bus servos so we give up this plan.</p>
               </figure>
@@ -136,6 +143,11 @@
               <p> The circles’ location calculated by OpenCV were in units of pixels, so we had to convert them to actual distances in meters. There were many ways to do this, such as external packages. Since our platform was not flat and the image was not a perfect projection of the actual platform, we thought the best way was to take some sample points and measure the backward projection. So we first found out the maximum range that the arm could reach, which was 0.15 m to -0.15 m in y (horizontal) direction and 0 m to 0.3 m in x (vertical) direction. Then we moved the arm to the two diagonal corners and placed the bottles in the place where the arm could grab. Next we took an image of the field and calculated the pixel position of the bottle’s center. Now we have two set of (x, y) points, one in meter and one in the corresponding pixels. We found the slope and y intercept for both x and y direction, and wrote a simple linear conversion function. finally, we converted the bottles’ centers from pixel to meter with this function and stored them in a text file. </p>
               <p> From what we saw in the end result, this simple linear conversion was very accurate in most cases. It was most accurate when the bottle was close to the center of the field (where the camera was placed) and less accurate further away. This was mostly because the wooden field was not flat, and the image of the camera was also not a perfect linear projection. A way to improve its accuracy was to sample more points and make a 2D interpolation using methods such as basis spline. Due to time limit, we settled with linear conversion.</p>
               <h3>Inverse Kinematics</h3>
+              <figure>
+                <img src="img/3D_printed_parts.jpg" src="img/3D_printed_parts2.jpg" alt="3D printed parts" width="350" height="350">
+                <figcaption>Figure 2: 3D printed servo bracket that fits the PWM servos.</figcaption>
+                <p> We initially want to 3D print all parts that are related to the servo and combine them with other frameworks such as the base station and the gripper. However, the PWM servos are not as accurate as the serial bus servos so we give up this plan.</p>
+              </figure>
               <p> The second task of this system was to convert the target location in meters to servo rotating degrees in angles. We used Inverse Kinematics to achieve this task. Before we dive into Inverse Kinematics, we should briefly introduce Forward Kinematics. Suppose we know the rotating angles of our 6 servos, we could build a reference frame for every servo. Forward Kinematics is to build a position relationship of base attached servo with end-effector, also known as a gripper. The basic method for Inverse Kinematics is initializing a rotating angle for each servo and then use Forward Kinematics to compute the current target position. We compare current target position and goal position to output an error. Then Velocity Kinematics aims to calculate the updated rotating angles (you could image Velocity Kinematics as gradient since we want to minimize error). Then in the iteration, we minimize error to a threshold and output rotating angles for each servo. </p>
               <p> We used open-loop control which meant the arm would reach the target with a single calculation. Although this was not as accurate as close-loop control, it was faster. Considering that both image recognition and serial communication were slow, we chose open-loop control. The test result showed that this method was fairly good in terms of speed and accuracy. On the simple model platform that we build, our robot could successfully recognize and pick up bottles over 95% of the time unless the bottle is out of the arm’s reach. Additionally, we used Forward Kinematics to test the accuracy of Inverse Kinematics, and the results were satisfactory. </p>
               <h3>Communication between Raspberry Pi 3 and Arduino </h3>
