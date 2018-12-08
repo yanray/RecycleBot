@@ -109,7 +109,7 @@
               <p>When the system first started, the Raspberry Pi camera captured an image of the field. Then the system checked if there were recyclable bottles in the field by identifying red circles on the image with a OpenCV program. If there was one or more bottles, the program would calculate the center of the red caps. Then those values in pixels were converted to values in meters. Another program read the location values and converted them to sets of angles using inverse kinematics. Each set contained six angles since there were six servos on the arm. Then the Raspberry Pi would send those angles one by one to an arduino that controlled the arm through USB serial port. Next the arduino send the angle movements to the servos on the arm through serial port. The arm would then perform a series of movements that allowed it to grab the bottles at the target locations and put them inside the recycle bin. After all bottles were cleared, the arduino would send a ‘done’ message to the Raspberry Pi, and the Pi would take another image of the field. The whole process described above is then repeated.  </p>
               <figure>
                 <img src="img/platform.jpg" alt="RecycleBot and the model workspace" width="450" height="450">
-                <figcaption>Figure 2: RecycleBot and the model workspace</figcaption>
+                <figcaption>Figure 1: RecycleBot and the model workspace. </figcaption>
                 <p> This image shows the final and complete system of this project.  </p>
               </figure>
               
@@ -119,7 +119,7 @@
               <p> In the first week of final project, we planned our work and prepared for hardware and software simultaneously. Because we were familiar with lab servos, we wanted to 3D print all the necessary mechanical parts for our robot. </p>
               <figure>
                 <img src="img/early_sketch.PNG" alt="early sketch of our robot system" width="400" height="400">
-                <figcaption>Figure 1: early sketch of our robot system.</figcaption>
+                <figcaption>Figure 2: early sketch of our robot system. </figcaption>
                 <p> This is the first design sketch we made. This sketch describes most of our system parts. The initial design includes four servos and one camera. Recycle bin is on the left side. </p>
               </figure>
               
@@ -134,20 +134,20 @@
                     <img src="img/3D_printed_parts2.jpg" alt="3D printed parts2">
                   </div>
                 </div>
-                <figcaption>Figure 2: 3D printed servo bracket that fits the PWM servos.</figcaption>
+                <figcaption>Figure 3: 3D printed servo bracket that fits the PWM servos.</figcaption>
                 <p> We initially want to 3D print all parts that are related to the servo and combine them with other frameworks such as the base station and the gripper. However, the PWM servos are not as accurate as the serial bus servos so we give up this plan.</p>
               </figure>
               <p> Then we faced the biggest issue: the PWM lab servos were not accurate. When the signal was send through PWM, the error could be over 5 degrees. Therefore, they were too incurrate to be used as servos for robotic arm. We had to give up the old servos and use the servos from the arm kit instead.</p>
               <p> We attached all the servos and links using robotic arm we bought online. After testing the functionality of every servo and link, we built our whole system as the following image shown. </p>
               <figure>
                 <img src="img/complete_arm.jpg" alt="complete_arm" class="rotate90">
-                <figcaption>Figure 1: The assembled arm using parts from the LewanSoul xArm kit.</figcaption>
+                <figcaption>Figure 4: The assembled arm using parts from the LewanSoul xArm kit.</figcaption>
                 <p> The LewanSoul xArm kit comes with mechanical parts, servos, a motor controller, desktop software, and many more accessories. We are using their mechanical parts and servos. During the testing, we are using the motor controller as a power supply switch for the arm.</p>
               </figure>
               <figure>
                 <img src="img/first_testing.jpg" alt="Testing the arm control program" width="350" height="350">
-                <figcaption>We accidentally broke the motor controller that the arm kit originally contained. So we instead connected the signal wires on the servos to the serial port on an old Arduino. The servos followed the signals from the Arduino very well.</figcaption>
-                <p>aims to compute Forward Kinematics. </p>
+                <figcaption>Figure 5: Testing the arm control program.</figcaption>
+                <p> We accidentally broke the motor controller that the arm kit originally contained. So we instead connected the signal wires on the servos to the serial port on an old Arduino. The servos followed the signals from the Arduino very well.</p>
               </figure>
               
               <h2 id="Software_Design" class="checkpoint">Software Design</h2>
@@ -163,7 +163,7 @@
                     <img src="img/image_detection.png" alt="Image recognition using OpenCV2">
                   </div>
                 </div>
-                <figcaption>Figure 2: Image recognition using OpenCV</figcaption>
+                <figcaption>Figure 6: Image recognition using OpenCV. </figcaption>
                 <p> The Pi camera takes a picture of the workspace (left) and saves the image in the RPi3 file system. Then the image recognition C++ program identifies the red circles. The identified cycles are outlined in green, and the center locations are printed for testing purposes (right). </p>
               </figure>
               
@@ -173,7 +173,7 @@
               <h3>Inverse Kinematics</h3>
               <figure>
                 <img src="img/DH_matrix.jpg" alt="DH_matrix" width="450" height="450">
-                <figcaption>Figure 2: DH_matrix</figcaption>
+                <figcaption>Figure 7: DH_matrix. </figcaption>
                 <p> On the left, we build different frames on each servo. On the right, we list four parameters for frame change. This aims to compute Forward Kinematics. </p>
               </figure>
               <p> The second task of this system was to convert the target location in meters to servo rotating degrees in angles. We used Inverse Kinematics to achieve this task. Before we dive into Inverse Kinematics, we should briefly introduce Forward Kinematics. Suppose we know the rotating angles of our 6 servos, we could build a reference frame for every servo. Forward Kinematics is to build a position relationship of base attached servo with end-effector, also known as a gripper. The basic method for Inverse Kinematics is initializing a rotating angle for each servo and then use Forward Kinematics to compute the current target position. We compare current target position and goal position to output an error. Then Velocity Kinematics aims to calculate the updated rotating angles (you could image Velocity Kinematics as gradient since we want to minimize error). Then in the iteration, we minimize error to a threshold and output rotating angles for each servo. </p>
@@ -195,7 +195,7 @@
                     <img src="img/grip2.jpg" alt="RecycleBot finding a bottle and putting it inside the recycle bin2">
                   </div>
                 </div>
-                <figcaption>Figure 2: RecycleBot finding a bottle and putting it inside the recycle bin</figcaption>
+                <figcaption>Figure 8: RecycleBot finding a bottle and putting it inside the recycle bin. </figcaption>
                 <p> Those two image demonstrate how RecycleBot successfully identifies a bottle, grabs it at the target location, and puts it inside the recycle bin.</p>
               </figure>
               
