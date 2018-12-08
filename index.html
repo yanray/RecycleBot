@@ -94,7 +94,6 @@
           <div class="column is-two-thirds">
             <div class="content">
               <iframe width="560" height="315" src="https://www.youtube.com/embed/QyZxaB_sypM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-              <p>video1: Demonstration Video </p>
               <h1 id="Objective" class="checkpoint">Objective</h1>
               <p>The objective of this project is to design and assemble a robotic arm that recognizes and picks out recyclable wastes from a workspace of mixed wastes. The arm should be able to approach its target with a good accuracy, and occasional mistakes can be tolerated. This recycling robot will both reduce the cost in waste management and also reduce amount of man made wastes in nature.</p>
               
@@ -109,7 +108,7 @@
                 <img src="img/platform.jpg" alt="RecycleBot and the model workspace" width="450" height="450">
                 <figcaption>Figure 1: RecycleBot and the model workspace. </figcaption>
                 </figure>
-              <p><strong>Note:</strong>This image shows the final and complete system of this project.  </p>
+              <p><strong>Figure1 Note:  </strong>This image shows the final and complete system of this project.  </p>
 
               <h1 id="Design" class="checkpoint">Design</h1>
               <p> </p>
@@ -119,7 +118,7 @@
                 <img src="img/early_sketch.PNG" alt="early sketch of our robot system" width="400" height="400">
                 <figcaption>Figure 2: early sketch of our robot system. </figcaption>
               </figure>
-              <p><strong>Note:</strong>This is the first design sketch we made. This sketch describes most of our system parts. The initial design includes four servos and one camera. Recycle bin is on the left side. </p>
+              <p><strong>Figure2 Note:  </strong>This is the first design sketch we made. This sketch describes most of our system parts. The initial design includes four servos and one camera. Recycle bin is on the left side. </p>
       
               <p> We first downloaded an open source robotic arm CAD from online. We printed several parts but got some printing failures for the larger parts. Additionally, some parts required up to 20 hours to print. There were 27 parts in total which we estimated would require at least a week to print. We gave up for printing the whole arm due to time limits.</p>
               <p> We then bought a robotic arm from Amazon.com, we decided to use only the mechanical parts of it. Because the servos we used in lab and the servos for the arm were of different sizes, we 3D printed links and brackets that would fit our own servos.</p>
@@ -134,20 +133,21 @@
                 </div>
                 <figcaption>Figure 3: 3D printed servo bracket that fits the PWM servos.</figcaption>
               </figure>
-              <p><strong>Note:</strong> We initially want to 3D print all parts that are related to the servo and combine them with other frameworks such as the base station and the gripper. However, the PWM servos are not as accurate as the serial bus servos so we give up this plan.</p>
+              <p><strong>Figure3 Note:  </strong>We initially want to 3D print all parts that are related to the servo and combine them with other frameworks such as the base station and the gripper. However, the PWM servos are not as accurate as the serial bus servos so we give up this plan.</p>
 
               <p> Then we faced the biggest issue: the PWM lab servos were not accurate. When the signal was send through PWM, the error could be over 5 degrees. Therefore, they were too incurrate to be used as servos for robotic arm. We had to give up the old servos and use the servos from the arm kit instead.</p>
               <p> We attached all the servos and links using robotic arm we bought online. After testing the functionality of every servo and link, we built our whole system as the following image shown. </p>
               <figure>
                 <img src="img/complete_arm.png" alt="complete_arm">
                 <figcaption>Figure 4: The assembled arm using parts from the LewanSoul xArm kit.</figcaption>
-                <p> The LewanSoul xArm kit comes with mechanical parts, servos, a motor controller, desktop software, and many more accessories. We are using their mechanical parts and servos. During the testing, we are using the motor controller as a power supply switch for the arm.</p>
               </figure>
+              <p><strong>Figure4 Note:  </strong>The LewanSoul xArm kit comes with mechanical parts, servos, a motor controller, desktop software, and many more accessories. We are using their mechanical parts and servos. During the testing, we are using the motor controller as a power supply switch for the arm.</p>
+              
               <figure>
                 <img src="img/first_testing.png" alt="Testing the arm control program" class="rotateimg180" width="400" height="500">
                 <figcaption>Figure 5: Testing the arm control program.</figcaption>
-                <p> We accidentally broke the motor controller that the arm kit originally contained. So we instead connected the signal wires on the servos to the serial port on an old Arduino. The servos followed the signals from the Arduino very well.</p>
               </figure>
+              <p><strong>Figure5 Note:  </strong>We accidentally broke the motor controller that the arm kit originally contained. So we instead connected the signal wires on the servos to the serial port on an old Arduino. The servos followed the signals from the Arduino very well.</p>
               
               <h2 id="Software_Design" class="checkpoint">Software Design</h2>
               <h3>Computer Vision</h3>
@@ -163,8 +163,9 @@
                   </div>
                 </div>
                 <figcaption>Figure 6: Image recognition using OpenCV. </figcaption>
-                <p> The Pi camera takes a picture of the workspace (left) and saves the image in the RPi3 file system. Then the image recognition C++ program identifies the red circles. The identified cycles are outlined in green, and the center locations are printed for testing purposes (right). </p>
               </figure>
+              <p><strong>Figure6 Note:  </strong>The Pi camera takes a picture of the workspace (left) and saves the image in the RPi3 file system. Then the image recognition C++ program identifies the red circles. The identified cycles are outlined in green, and the center locations are printed for testing purposes (right). </p>
+              
               
               <h3>Coordinate Conversion</h3>
               <p> The circles’ location calculated by OpenCV were in units of pixels, so we had to convert them to actual distances in meters. There were many ways to do this, such as external packages. Since our platform was not flat and the image was not a perfect projection of the actual platform, we thought the best way was to take some sample points and measure the backward projection. So we first found out the maximum range that the arm could reach, which was 0.15 m to -0.15 m in y (horizontal) direction and 0 m to 0.3 m in x (vertical) direction. Then we moved the arm to the two diagonal corners and placed the bottles in the place where the arm could grab. Next we took an image of the field and calculated the pixel position of the bottle’s center. Now we have two set of (x, y) points, one in meter and one in the corresponding pixels. We found the slope and y intercept for both x and y direction, and wrote a simple linear conversion function. finally, we converted the bottles’ centers from pixel to meter with this function and stored them in a text file. </p>
@@ -173,8 +174,9 @@
               <figure>
                 <img src="img/DH_matrix.jpg" alt="DH_matrix" width="450" height="450">
                 <figcaption>Figure 7: DH_matrix. </figcaption>
-                <p> On the left, we build different frames on each servo. On the right, we list four parameters for frame change. This aims to compute Forward Kinematics. </p>
               </figure>
+              <p><strong>Figure7 Note:  </strong>On the left, we build different frames on each servo. On the right, we list four parameters for frame change. This aims to compute Forward Kinematics. </p>
+              
               <p> The second task of this system was to convert the target location in meters to servo rotating degrees in angles. We used Inverse Kinematics to achieve this task. Before we dive into Inverse Kinematics, we should briefly introduce Forward Kinematics. Suppose we know the rotating angles of our 6 servos, we could build a reference frame for every servo. Forward Kinematics is to build a position relationship of base attached servo with end-effector, also known as a gripper. The basic method for Inverse Kinematics is initializing a rotating angle for each servo and then use Forward Kinematics to compute the current target position. We compare current target position and goal position to output an error. Then Velocity Kinematics aims to calculate the updated rotating angles (you could image Velocity Kinematics as gradient since we want to minimize error). Then in the iteration, we minimize error to a threshold and output rotating angles for each servo. </p>
               <p> We used open-loop control which meant the arm would reach the target with a single calculation. Although this was not as accurate as close-loop control, it was faster. Considering that both image recognition and serial communication were slow, we chose open-loop control. The test result showed that this method was fairly good in terms of speed and accuracy. On the simple model platform that we build, our robot could successfully recognize and pick up bottles over 95% of the time unless the bottle is out of the arm’s reach. Additionally, we used Forward Kinematics to test the accuracy of Inverse Kinematics, and the results were satisfactory. </p>
               <h3>Communication between Raspberry Pi 3 and Arduino </h3>
@@ -195,8 +197,9 @@
                   </div>
                 </div>
                 <figcaption>Figure 8: RecycleBot finding a bottle and putting it inside the recycle bin. </figcaption>
-                <p> Those two image demonstrate how RecycleBot successfully identifies a bottle, grabs it at the target location, and puts it inside the recycle bin.</p>
-              </figure>
+               </figure>
+               <p><strong>Figure8 Note:  </strong>Those two image demonstrate how RecycleBot successfully identifies a bottle, grabs it at the target location, and puts it inside the recycle bin.</p>
+              
               
               <h1 id="Conclusion" class="checkpoint">Conclusion</h1>
               <p>The test results that our system achieved were fairly good in terms of speed and accuracy. On the simple model platform that we build, our robot could successfully recognize and pick up bottles over 95% of the time. There were some situations when the robot performed poorly, such as when the light was dim and when there were other red objects on the platform. One thing we discovered is that it is impossible for the robot to be accurate 100% of the time. During the entire process, there were many places that could be heavily affected by noises and uncertainties, such as the image recognition stage, the inverse kinematic calculation, and so on. </p>
